@@ -1,65 +1,172 @@
-import Image from "next/image";
+import Hero from '@/components/Hero';
+import EventDetails from '@/components/EventDetails';
+import Gallery from '@/components/Gallery';
+import FloatingMusicPlayer from '@/components/FloatingMusicPlayer';
+import { InvitationData } from '@/types/invitation';
 
-export default function Home() {
+// Simulating data fetching - In production, this could be:
+// - API call to your backend
+// - Database query
+// - CMS integration
+// - Dynamic route parameter
+async function getInvitationData(): Promise<InvitationData> {
+  // Option 1: Static JSON import
+  // return await import('@/data/sample-invitation.json');
+
+  // Option 2: Simulated API call
+  const data: InvitationData = {
+    hero: {
+      title: 'The Wedding of',
+      brideName: 'Sarah',
+      groomName: 'Michael',
+      date: '2024-12-15',
+      bgImage:
+        'https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80',
+      subtitle: 'Join us in celebrating our love',
+    },
+    events: [
+      {
+        id: 'akad',
+        title: 'Akad Nikah',
+        time: '09:00 WIB',
+        location: 'Masjid Al-Ikhlas',
+        address: 'Jl. Raya Bogor No. 123, Jakarta Selatan',
+        mapLink: 'https://maps.google.com/?q=-6.2088,106.8456',
+        description: 'Upacara pernikahan sakral',
+      },
+      {
+        id: 'resepsi',
+        title: 'Resepsi Pernikahan',
+        time: '12:00 - 15:00 WIB',
+        location: 'Balai Kartini',
+        address: 'Jl. Gatot Subroto No. 456, Jakarta Selatan',
+        mapLink: 'https://maps.google.com/?q=-6.2115,106.8452',
+        description: 'Perayaan bersama keluarga dan sahabat',
+      },
+    ],
+    gallery: {
+      images: [
+        {
+          id: '1',
+          url: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80',
+          alt: 'Couple photo 1',
+          caption: 'Our engagement day',
+        },
+        {
+          id: '2',
+          url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80',
+          alt: 'Couple photo 2',
+          caption: 'Pre-wedding photoshoot',
+        },
+        {
+          id: '3',
+          url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80',
+          alt: 'Couple photo 3',
+          caption: 'Beautiful moments',
+        },
+        {
+          id: '4',
+          url: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&q=80',
+          alt: 'Couple photo 4',
+        },
+        {
+          id: '5',
+          url: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80',
+          alt: 'Couple photo 5',
+        },
+        {
+          id: '6',
+          url: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80',
+          alt: 'Couple photo 6',
+        },
+      ],
+    },
+    theme: {
+      primaryColor: '#D4AF37',
+      secondaryColor: '#8B7355',
+      accentColor: '#F5E6D3',
+      fontStyle: 'elegant',
+    },
+    music: {
+      url: '/audio/wedding-song.mp3',
+      title: 'Perfect',
+      artist: 'Ed Sheeran',
+      autoplay: false,
+    },
+  };
+
+  return data;
+}
+
+// Main Page Component
+export default async function WeddingInvitationPage() {
+  // Fetch invitation data
+  const invitationData = await getInvitationData();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="relative min-h-screen">
+      {/* Hero Section */}
+      <Hero data={invitationData.hero} theme={invitationData.theme} />
+
+      {/* Event Details Section */}
+      <EventDetails
+        events={invitationData.events}
+        theme={invitationData.theme}
+      />
+
+      {/* Gallery Section */}
+      <Gallery data={invitationData.gallery} theme={invitationData.theme} />
+
+      {/* Footer */}
+      <footer
+        className="py-12 text-center"
+        style={{ backgroundColor: invitationData.theme.secondaryColor }}
+      >
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-white/90 mb-4 text-lg font-serif-elegant">
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+            Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada
+            kami.
+          </p>
+          <div
+            className="w-16 h-1 mx-auto mb-6"
+            style={{ backgroundColor: invitationData.theme.primaryColor }}
+          />
+          <p className="text-white/80 text-sm">
+            Kami yang berbahagia,
+          </p>
+          <p
+            className="text-2xl font-script mt-2"
+            style={{ color: invitationData.theme.primaryColor }}
+          >
+            {invitationData.hero.brideName} & {invitationData.hero.groomName}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </footer>
+
+      {/* Floating Music Player */}
+      <FloatingMusicPlayer
+        music={invitationData.music}
+        theme={invitationData.theme}
+      />
+    </main>
   );
 }
+
+// Export metadata for SEO
+export const metadata = {
+  title: 'Wedding Invitation - Sarah & Michael',
+  description: 'Join us in celebrating our special day',
+  openGraph: {
+    title: 'Wedding Invitation - Sarah & Michael',
+    description: 'Join us in celebrating our special day',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200',
+        width: 1200,
+        height: 630,
+        alt: 'Wedding Invitation',
+      },
+    ],
+  },
+};
