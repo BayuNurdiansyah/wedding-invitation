@@ -17,11 +17,11 @@ async function getInvitationData(): Promise<InvitationData> {
   const data: InvitationData = {
     hero: {
       title: 'The Wedding of',
-      brideName: 'Sarah',
-      groomName: 'Michael',
+      brideName: 'Novi',
+      groomName: 'Bayu',
       date: '2024-12-15',
       bgImage:
-        'https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80',
+        '/img/hero/bg-hero-wedding.png',
       subtitle: 'Join us in celebrating our love',
     },
     events: [

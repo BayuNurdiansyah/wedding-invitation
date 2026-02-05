@@ -22,13 +22,11 @@ export default function FloatingMusicPlayer({
   useEffect(() => {
     if (!music) return;
 
-    // Create audio element
     const audio = new Audio(music.url);
     audio.loop = true;
     audio.volume = 0.5;
     audioRef.current = audio;
 
-    // Auto-play if configured
     if (music.autoplay) {
       const playPromise = audio.play();
       if (playPromise !== undefined) {
@@ -73,7 +71,7 @@ export default function FloatingMusicPlayer({
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 1, duration: 0.5 }}
-      className="fixed bottom-8 right-8 z-50"
+      className="fixed bottom-6 right-6 z-50"
     >
       <div className="relative">
         {/* Expanded Info */}
@@ -84,37 +82,37 @@ export default function FloatingMusicPlayer({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="absolute bottom-full right-0 mb-4 glass-effect rounded-2xl p-4 min-w-[250px] shadow-2xl"
+              className="absolute bottom-full right-0 mb-3 glass-effect rounded-xl p-3 min-w-[200px] shadow-2xl"
               style={{ borderColor: `${theme.primaryColor}30` }}
             >
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-2">
                 <div
-                  className="p-3 rounded-xl animate-pulse-slow"
+                  className="p-2 rounded-lg animate-pulse-slow"
                   style={{ backgroundColor: `${theme.primaryColor}20` }}
                 >
                   <Music
-                    className="w-6 h-6"
+                    className="w-4 h-4"
                     style={{ color: theme.primaryColor }}
                   />
                 </div>
                 <div className="flex-1">
-                  <p className="font-semibold text-gray-800 mb-1">
+                  <p className="font-semibold text-gray-800 text-sm mb-1">
                     {music.title}
                   </p>
-                  <p className="text-sm text-gray-600">{music.artist}</p>
+                  <p className="text-xs text-gray-600">{music.artist}</p>
                 </div>
               </div>
 
               {/* Volume Control */}
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-3 flex items-center gap-2">
                 <button
                   onClick={toggleMute}
-                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="p-1 rounded-lg hover:bg-gray-100 transition-colors"
                 >
                   {isMuted ? (
-                    <VolumeX className="w-4 h-4 text-gray-600" />
+                    <VolumeX className="w-3 h-3 text-gray-600" />
                   ) : (
-                    <Volume2 className="w-4 h-4 text-gray-600" />
+                    <Volume2 className="w-3 h-3 text-gray-600" />
                   )}
                 </button>
                 <div className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
@@ -137,6 +135,7 @@ export default function FloatingMusicPlayer({
           onClick={togglePlay}
           onMouseEnter={() => setIsExpanded(true)}
           onMouseLeave={() => setIsExpanded(false)}
+          onTouchStart={() => setIsExpanded(true)}
           className="relative group"
         >
           {/* Animated Rings */}
@@ -174,19 +173,19 @@ export default function FloatingMusicPlayer({
 
           {/* Button */}
           <div
-            className="relative w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 group-hover:shadow-3xl"
+            className="relative w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 group-hover:shadow-3xl"
             style={{ backgroundColor: theme.primaryColor }}
           >
             {isPlaying ? (
-              <Pause className="w-7 h-7 text-white" fill="white" />
+              <Pause className="w-5 h-5 text-white" fill="white" />
             ) : (
-              <Play className="w-7 h-7 text-white ml-1" fill="white" />
+              <Play className="w-5 h-5 text-white ml-0.5" fill="white" />
             )}
 
             {/* Spinning Vinyl Effect */}
             {isPlaying && (
               <motion.div
-                className="absolute inset-0 rounded-full border-4 border-white/30"
+                className="absolute inset-0 rounded-full border-2 border-white/30"
                 animate={{ rotate: 360 }}
                 transition={{
                   duration: 3,
@@ -200,7 +199,7 @@ export default function FloatingMusicPlayer({
 
         {/* Status Indicator */}
         <motion.div
-          className="absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-white"
+          className="absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-white"
           style={{
             backgroundColor: isPlaying ? '#10b981' : '#ef4444',
           }}

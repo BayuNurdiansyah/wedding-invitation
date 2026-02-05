@@ -11,7 +11,8 @@ const config: Config = {
       fontFamily: {
         'serif-elegant': ['var(--font-serif-elegant)', 'serif'],
         'sans-modern': ['var(--font-sans-modern)', 'sans-serif'],
-        'script': ['var(--font-script)', 'cursive'],
+        'cormorant': ['var(--font-cormorant)'],
+        'pinyon': ['var(--font-pinyon)'],
       },
     },
   },

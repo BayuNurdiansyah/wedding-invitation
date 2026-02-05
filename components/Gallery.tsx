@@ -50,34 +50,34 @@ export default function Gallery({ data, theme }: GalleryProps) {
   return (
     <>
       <section
-        className="py-20 px-6"
+        className="py-12 px-4"
         style={{ backgroundColor: theme.accentColor }}
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full">
           <ScrollReveal variant="fadeIn" delay={0.2}>
-            <div className="text-center mb-16">
+            <div className="text-center mb-10">
               <motion.div
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="w-24 h-1 mx-auto mb-6"
+                className="w-16 h-1 mx-auto mb-4"
                 style={{ backgroundColor: theme.primaryColor }}
               />
               <h2
-                className={`text-4xl md:text-5xl mb-4 ${fontClass}`}
+                className={`text-3xl mb-3 ${fontClass}`}
                 style={{ color: theme.secondaryColor }}
               >
                 Galeri Momen
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-600 text-sm">
                 Kenangan indah perjalanan cinta kami
               </p>
             </div>
           </ScrollReveal>
 
-          {/* Masonry Grid */}
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          {/* Grid Layout - 2 columns for mobile */}
+          <div className="grid grid-cols-2 gap-3">
             {data.images.map((image, index) => (
               <ScrollReveal
                 key={image.id}
@@ -85,49 +85,27 @@ export default function Gallery({ data, theme }: GalleryProps) {
                 delay={0.1 * index}
               >
                 <motion.div
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.3 }}
-                  className="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-2xl"
+                  className="relative group cursor-pointer overflow-hidden rounded-xl aspect-square"
                   onClick={() => openLightbox(index)}
                 >
-                  <div className="relative aspect-[4/3] md:aspect-auto md:h-auto">
-                    <Image
-                      src={image.url}
-                      alt={image.alt}
-                      width={600}
-                      height={400}
-                      className="w-full h-auto object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </div>
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 480px) 50vw, 240px"
+                  />
 
                   {/* Overlay on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-end p-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
                     {image.caption && (
-                      <p className="text-white text-sm font-medium">
+                      <p className="text-white text-xs font-medium">
                         {image.caption}
                       </p>
                     )}
-                  </div>
-
-                  {/* Corner Accent */}
-                  <div
-                    className="absolute top-4 right-4 w-12 h-12 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                    style={{ backgroundColor: `${theme.primaryColor}90` }}
-                  >
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                      />
-                    </svg>
                   </div>
                 </motion.div>
               </ScrollReveal>
@@ -149,9 +127,9 @@ export default function Gallery({ data, theme }: GalleryProps) {
             {/* Close Button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
+              className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
             >
-              <X className="w-6 h-6 text-white" />
+              <X className="w-5 h-5 text-white" />
             </button>
 
             {/* Navigation Buttons */}
@@ -160,9 +138,9 @@ export default function Gallery({ data, theme }: GalleryProps) {
                 e.stopPropagation();
                 goToPrevious();
               }}
-              className="absolute left-6 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
+              className="absolute left-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
             >
-              <ChevronLeft className="w-8 h-8 text-white" />
+              <ChevronLeft className="w-6 h-6 text-white" />
             </button>
 
             <button
@@ -170,9 +148,9 @@ export default function Gallery({ data, theme }: GalleryProps) {
                 e.stopPropagation();
                 goToNext();
               }}
-              className="absolute right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
+              className="absolute right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
             >
-              <ChevronRight className="w-8 h-8 text-white" />
+              <ChevronRight className="w-6 h-6 text-white" />
             </button>
 
             {/* Image */}
@@ -182,16 +160,16 @@ export default function Gallery({ data, theme }: GalleryProps) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative max-w-5xl max-h-[80vh] w-full"
+              className="relative w-full max-w-md aspect-square"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
                 src={data.images[selectedImage].url}
                 alt={data.images[selectedImage].alt}
-                width={1200}
-                height={800}
-                className="w-full h-full object-contain rounded-lg"
+                fill
+                className="object-contain rounded-lg"
                 priority
+                sizes="480px"
               />
 
               {/* Caption */}
@@ -200,9 +178,9 @@ export default function Gallery({ data, theme }: GalleryProps) {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg"
+                  className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg"
                 >
-                  <p className="text-white text-center text-lg">
+                  <p className="text-white text-center text-sm">
                     {data.images[selectedImage].caption}
                   </p>
                 </motion.div>
@@ -210,8 +188,8 @@ export default function Gallery({ data, theme }: GalleryProps) {
             </motion.div>
 
             {/* Image Counter */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm">
-              <p className="text-white text-sm font-medium">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm">
+              <p className="text-white text-xs font-medium">
                 {selectedImage + 1} / {data.images.length}
               </p>
             </div>

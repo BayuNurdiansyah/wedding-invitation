@@ -18,32 +18,32 @@ export default function EventDetails({ events, theme }: EventDetailsProps) {
   }[theme.fontStyle];
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-12 px-4 bg-gradient-to-b from-white to-gray-50">
+      <div className="w-full">
         <ScrollReveal variant="fadeIn" delay={0.2}>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="w-24 h-1 mx-auto mb-6"
+              className="w-16 h-1 mx-auto mb-4"
               style={{ backgroundColor: theme.primaryColor }}
             />
             <h2
-              className={`text-4xl md:text-5xl mb-4 ${fontClass}`}
+              className={`text-3xl mb-3 ${fontClass}`}
               style={{ color: theme.secondaryColor }}
             >
               Acara Pernikahan
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-600 text-sm px-4">
               Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
-              Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu
+              Bapak/Ibu/Saudara/i berkenan hadir
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="space-y-6">
           {events.map((event, index) => (
             <ScrollReveal
               key={event.id}
@@ -51,22 +51,22 @@ export default function EventDetails({ events, theme }: EventDetailsProps) {
               delay={0.2 * (index + 1)}
             >
               <motion.div
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                whileHover={{ y: -4, transition: { duration: 0.3 } }}
                 className="relative group"
               >
                 {/* Card */}
                 <div
-                  className="relative overflow-hidden rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-shadow duration-300 p-8 border-2"
+                  className="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border-2"
                   style={{ borderColor: `${theme.primaryColor}20` }}
                 >
                   {/* Decorative Corner */}
                   <div
-                    className="absolute top-0 right-0 w-32 h-32 opacity-10"
+                    className="absolute top-0 right-0 w-24 h-24 opacity-10"
                     style={{ backgroundColor: theme.primaryColor }}
                   >
                     <svg
                       viewBox="0 0 100 100"
-                      className="absolute -top-6 -right-6"
+                      className="absolute -top-4 -right-4"
                     >
                       <circle cx="50" cy="50" r="40" fill="currentColor" />
                     </svg>
@@ -75,7 +75,7 @@ export default function EventDetails({ events, theme }: EventDetailsProps) {
                   {/* Event Title */}
                   <div className="relative z-10">
                     <div
-                      className="inline-block px-4 py-2 rounded-full mb-4 text-sm font-semibold"
+                      className="inline-block px-3 py-1 rounded-full mb-3 text-xs font-semibold"
                       style={{
                         backgroundColor: `${theme.primaryColor}15`,
                         color: theme.secondaryColor,
@@ -85,47 +85,47 @@ export default function EventDetails({ events, theme }: EventDetailsProps) {
                     </div>
 
                     {/* Time */}
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-2 mb-3">
                       <div
-                        className="p-3 rounded-full"
+                        className="p-2 rounded-full"
                         style={{ backgroundColor: `${theme.primaryColor}10` }}
                       >
                         <Clock
-                          className="w-5 h-5"
+                          className="w-4 h-4"
                           style={{ color: theme.primaryColor }}
                         />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Waktu</p>
-                        <p className="text-lg font-semibold text-gray-800">
+                        <p className="text-xs text-gray-500">Waktu</p>
+                        <p className="text-sm font-semibold text-gray-800">
                           {event.time}
                         </p>
                       </div>
                     </div>
 
                     {/* Location */}
-                    <div className="flex items-start gap-3 mb-4">
+                    <div className="flex items-start gap-2 mb-3">
                       <div
-                        className="p-3 rounded-full mt-1"
+                        className="p-2 rounded-full mt-1"
                         style={{ backgroundColor: `${theme.primaryColor}10` }}
                       >
                         <MapPin
-                          className="w-5 h-5"
+                          className="w-4 h-4"
                           style={{ color: theme.primaryColor }}
                         />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Lokasi</p>
-                        <p className="text-lg font-semibold text-gray-800 mb-1">
+                        <p className="text-xs text-gray-500">Lokasi</p>
+                        <p className="text-sm font-semibold text-gray-800 mb-1">
                           {event.location}
                         </p>
-                        <p className="text-sm text-gray-600">{event.address}</p>
+                        <p className="text-xs text-gray-600">{event.address}</p>
                       </div>
                     </div>
 
                     {/* Description */}
                     {event.description && (
-                      <p className="text-gray-600 mb-6 italic">
+                      <p className="text-gray-600 text-xs mb-4 italic">
                         {event.description}
                       </p>
                     )}
@@ -135,7 +135,7 @@ export default function EventDetails({ events, theme }: EventDetailsProps) {
                       href={event.mapLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-white transition-all duration-300 hover:shadow-lg hover:scale-105"
+                      className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium text-white transition-all duration-300 hover:shadow-lg hover:scale-105 w-full justify-center"
                       style={{ backgroundColor: theme.primaryColor }}
                     >
                       <Navigation className="w-4 h-4" />
@@ -143,15 +143,6 @@ export default function EventDetails({ events, theme }: EventDetailsProps) {
                     </a>
                   </div>
                 </div>
-
-                {/* Hover Effect Background */}
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl"
-                  style={{
-                    backgroundColor: `${theme.primaryColor}30`,
-                    transform: 'scale(0.95)',
-                  }}
-                />
               </motion.div>
             </ScrollReveal>
           ))}
@@ -159,34 +150,32 @@ export default function EventDetails({ events, theme }: EventDetailsProps) {
 
         {/* Save the Date Section */}
         <ScrollReveal variant="fadeIn" delay={0.6}>
-          <div className="mt-16 text-center">
+          <div className="mt-10 text-center">
             <div
-              className="inline-block px-8 py-4 rounded-2xl"
+              className="inline-block px-6 py-3 rounded-2xl"
               style={{ backgroundColor: `${theme.accentColor}` }}
             >
-              <p className="text-gray-700 mb-2">Simpan tanggal ini</p>
-              <div className="flex items-center justify-center gap-4">
+              <p className="text-gray-700 mb-2 text-sm">Simpan tanggal ini</p>
+              <div className="flex flex-col gap-2">
                 <button
-                  className="px-6 py-2 rounded-full border-2 font-medium transition-all hover:scale-105"
+                  className="px-4 py-2 rounded-full border-2 text-sm font-medium transition-all hover:scale-105"
                   style={{
                     borderColor: theme.primaryColor,
                     color: theme.primaryColor,
                   }}
                   onClick={() => {
-                    // Add to calendar logic
                     alert('Fitur kalender akan segera hadir!');
                   }}
                 >
                   + Google Calendar
                 </button>
                 <button
-                  className="px-6 py-2 rounded-full border-2 font-medium transition-all hover:scale-105"
+                  className="px-4 py-2 rounded-full border-2 text-sm font-medium transition-all hover:scale-105"
                   style={{
                     borderColor: theme.primaryColor,
                     color: theme.primaryColor,
                   }}
                   onClick={() => {
-                    // Add to calendar logic
                     alert('Fitur kalender akan segera hadir!');
                   }}
                 >
