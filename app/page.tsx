@@ -19,7 +19,7 @@ async function getInvitationData(): Promise<InvitationData> {
       title: 'The Wedding of',
       brideName: 'Novi',
       groomName: 'Bayu',
-      date: '2024-12-15',
+      date: '2026-02-07',
       bgImage:
         '/img/hero/bg-hero-wedding.png',
       subtitle: 'Join us in celebrating our love',
@@ -88,9 +88,9 @@ async function getInvitationData(): Promise<InvitationData> {
       fontStyle: 'elegant',
     },
     music: {
-      url: '/audio/wedding-song.mp3',
-      title: 'Perfect',
-      artist: 'Ed Sheeran',
+      url: '/audio/orange.mp3',
+      title: 'Orange - Shigatsu wa kimi no uso',
+      artist: '7!!',
       autoplay: false,
     },
   };

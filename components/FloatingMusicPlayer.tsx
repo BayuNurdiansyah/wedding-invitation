@@ -24,7 +24,7 @@ export default function FloatingMusicPlayer({
 
     const audio = new Audio(music.url);
     audio.loop = true;
-    audio.volume = 0.5;
+    audio.volume = 0.7;
     audioRef.current = audio;
 
     if (music.autoplay) {

@@ -30,10 +30,9 @@ const cormorantGaramond = Cormorant_Garamond({
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: "swap",
-
 });
 
-export const pinyonScript = Pinyon_Script({
+const pinyonScript = Pinyon_Script({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-pinyon',
@@ -52,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className={`${playfairDisplay.variable} ${inter.variable} ${greatVibes.variable} ${cormorantGaramond.variable} ${pinyonScript.variable}`}>
-      <body className={inter.className}>
+      <body className={cormorantGaramond.className}>
         {/* Desktop Container - Centers content like mobile app */}
         <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200">
           <div className="mx-auto max-w-[390px] min-h-screen bg-white shadow-2xl relative">
